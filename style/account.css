@@ -1,0 +1,100 @@
+/* --- Modern Glass & Neon Style for Account Page (harmonized with update) --- */
+body {
+    background: linear-gradient(120deg, #232526 0%, #414345 100%);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+
+.card {
+    border-radius: 18px;
+    background: linear-gradient(120deg, #232526 0%, #414345 100%);
+    box-shadow: 0 6px 32px 0 rgba(0,255,247,0.13);
+    border: none;
+    padding: 32px 24px 24px 24px;
+    max-width: 480px;
+    margin: 48px auto 0 auto;
+}
+
+h2 {
+    color: #00fff7;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+    text-align: center;
+    text-shadow: 0 0 8px #00fff7, 0 0 2px #fff;
+}
+
+label {
+    font-weight: 600;
+    color: #00fff7;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+input {
+    border-radius: 8px;
+    border: 2px solid #00fff7;
+    padding: 12px 14px;
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 1.08rem;
+    margin-bottom: 18px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff00cc;
+    box-shadow: 0 0 0 3px #00fff744;
+    background: rgba(0,0,0,0.18);
+}
+
+.btn-primary, .btn-success {
+    background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+    border: none;
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    color: #232526;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 0 12px #00fff7, 0 0 4px #ff00cc;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+    color: #fff;
+    transform: scale(1.04) translateY(-2px);
+}
+
+.text-danger {
+    color: #ff5252;
+    font-size: 15px;
+    font-weight: 600;
+    text-shadow: 0 1px 8px #ff00cc33;
+}
+
+.text-success {
+    color: #00e676;
+    font-size: 15px;
+    font-weight: 600;
+    text-shadow: 0 1px 8px #00fff733;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 16px 4vw;
+        max-width: 98vw;
+    }
+    input {
+        font-size: 1rem;
+        padding: 10px 8px;
+    }
+    .btn-primary, .btn-success {
+        width: 100%;
+        padding: 12px 0;
+    }
+}

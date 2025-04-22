@@ -1,0 +1,154 @@
+/* --- Modern Glassmorphism & Neon Style --- */
+body {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    min-height: 100vh;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container with glass effect */
+.container {
+    max-width: 950px;
+    margin: 48px auto 0 auto;
+    padding: 36px 32px 28px 32px;
+    background: rgba(255,255,255,0.13);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    position: relative;
+    z-index: 2;
+}
+
+/* Title with neon effect */
+h1 {
+    font-size: 2.7rem;
+    color: #fff;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    text-shadow: 0 0 8px #00fff7, 0 0 2px #fff;
+}
+
+/* Select dropdown styling */
+.form-select {
+    min-width: 240px;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #00fff7;
+    background: rgba(34,34,34,0.7);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(0,255,247,0.08);
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.form-select:focus {
+    border: 2.5px solid #ff00cc;
+    box-shadow: 0 0 0 3px #00fff7;
+}
+
+/* Insert link as a neon button */
+.insert a {
+    display: inline-block;
+    background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+    color: #232526;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 12px #00fff7, 0 0 4px #ff00cc;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    border: none;
+}
+.insert a:hover {
+    background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+    color: #fff;
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 20px #ff00cc, 0 0 8px #00fff7;
+}
+
+/* Table container */
+.table-responsive {
+    max-height: 55vh;
+    overflow-y: auto;
+    border-radius: 14px;
+    box-shadow: 0 2px 18px rgba(0,255,247,0.10);
+    background: rgba(34,34,34,0.25);
+    margin-top: 18px;
+}
+
+/* Table styling */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 0;
+    background: rgba(0,0,0,0.45);
+    border-radius: 14px;
+    overflow: hidden;
+    color: #fff;
+}
+
+.table th, .table td {
+    text-align: left;
+    padding: 15px 12px;
+    font-size: 1.05rem;
+}
+
+.table th {
+    background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+    color: #232526;
+    font-weight: 800;
+    border-bottom: 2px solid #ff00cc;
+    letter-spacing: 1px;
+}
+
+.table td {
+    border-bottom: 1px solid #232526;
+    color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,255,247,0.07);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #ff00cc;
+    color: #fff;
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Scrollbar styling for table */
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    background: #232526;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+    border-radius: 8px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 700px) {
+    .container {
+        padding: 10px 2vw;
+    }
+    .form-select {
+        min-width: 100%;
+        margin-bottom: 14px;
+    }
+    .table th, .table td {
+        padding: 8px 4px;
+        font-size: 0.98rem;
+    }
+    .insert a {
+        width: 100%;
+        text-align: center;
+    }
+}

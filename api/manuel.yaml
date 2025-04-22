@@ -1,0 +1,978 @@
+openapi: 3.0.0
+info:
+  title: BikeStore API
+  description: |
+    This API provides access to BikeStore's employees, stores, stocks, products, categories, and brands.
+    It supports basic CRUD operations using GET, POST, PUT, and DELETE methods.
+  version: "1.0"
+
+servers:
+  - url: https://sae401thibault.alwaysdata.net/api/
+
+paths:
+  /employees:
+    get:
+      summary: Get all employees
+      parameters:
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication is required because it contains sensitive data (employee info).
+      responses:
+        "200":
+          description: A list of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employee"
+
+  /employee/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: KEY
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API key for authentication is required because it contains sensitive data (employee info)..
+    get:
+      summary: Get employee by ID
+      responses:
+        "200":
+          description: An employee object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+
+  /employeeByStore/{store_id}:
+    get:
+      summary: Get employees by store ID
+      parameters:
+        - name: store_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication is required because it contains sensitive data (employee info).
+      responses:
+        "200":
+          description: List of employees in the store
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Employee"
+                  
+  /insertEmployee:
+    post:
+      summary: Add a new employee
+      description: |
+        Use this endpoint to add a new employee. You must provide all required parameters (store, name, email, password, role, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: store
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the store where the employee works.
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the employee.
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The email address of the employee.
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The password for the employee (minimum 6 characters).
+        - name: role
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The role of the employee (e.g., manager, staff).
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Employee added successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /updateEmployee/{id}:
+    put:
+      summary: Update an employee
+      description: |
+        Use this endpoint to update an existing employee. You must provide the employee ID and a valid API key (`KEY`). Other fields (name, email, password, role) are optional and can be updated as needed.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the employee to update.
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: role
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Employee updated successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /deleteEmployee/{id}:
+    delete:
+      summary: Delete an employee
+      description: |
+        Use this endpoint to delete an employee by their ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the employee to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Employee deleted successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /stores:
+    get:
+      summary: Get all stores
+      responses:
+        "200":
+          description: A list of stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Store"
+
+  /store/{id}:
+    get:
+      summary: Get store by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A store object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Store"
+  /insertStore:
+    post:
+      summary: Add a new store
+      description: |
+        Use this endpoint to add a new store. You must provide all required parameters (name, phone, email, street, city, state, zip_code, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the store.
+        - name: phone
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The phone number of the store.
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The email address of the store.
+        - name: street
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The street address of the store.
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The city where the store is located.
+        - name: state
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The state where the store is located.
+        - name: zip_code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The ZIP code of the store's location.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Store added successfully
+        "400":
+          description: Invalid input or missing parameters
+  /updateStore/{id}:
+    put:
+      summary: Update a store
+      description: |
+        Use this endpoint to update an existing store. You must provide the store ID and a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the store to update.
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: phone
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: street
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: zip_code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Store updated successfully
+        "400":
+          description: Invalid input or missing parameters
+  /deleteStore/{id}:
+    delete:
+      summary: Delete a store
+      description: |
+        Use this endpoint to delete a store by its ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the store to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Store deleted successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /stocks:
+    get:
+      summary: Get all stocks
+      responses:
+        "200":
+          description: A list of stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Stock"
+
+  /stock/{id}:
+    get:
+      summary: Get stock by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A stock object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stock"
+
+  /stockbystore/{store_id}:
+    get:
+      summary: Get stock by store ID
+      parameters:
+        - name: store_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of stock in store
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Stock"
+  /insertStock:
+    post:
+      summary: Add a new stock
+      description: |
+        Use this endpoint to add a new stock. You must provide all required parameters (product_id, store_id, quantity, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: product_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product.
+        - name: store_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the store.
+        - name: quantity
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The quantity of the product in stock.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Stock added successfully
+        "400":
+          description: Invalid input or missing parameters
+  /updateStock/{id}:
+    put:
+      summary: Update a stock
+      description: |
+        Use this endpoint to update an existing stock. You must provide the stock ID and a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the stock to update.
+        - name: product_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: store_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: quantity
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Stock updated successfully
+        "400":
+          description: Invalid input or missing parameters
+  /deleteStock/{id}:
+    delete:
+      summary: Delete a stock
+      description: |
+        Use this endpoint to delete a stock by its ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the stock to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Stock deleted successfully
+        "400":
+          description: Invalid input or missing parameters
+  /products:
+    get:
+      summary: Get all products
+      responses:
+        "200":
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+  /product/{id}:
+    get:
+      summary: Get product by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A product object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+  /productbycategory/{category_id}:
+    get:
+      summary: Get products by category ID
+      parameters:
+        - name: category_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of products in category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+  /productbybrand/{brand_id}:
+    get:
+      summary: Get products by brand ID
+      parameters:
+        - name: brand_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of products for brand
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /insertProduct:
+    post:
+      summary: Add a new product
+      description: |
+        Use this endpoint to add a new product. You must provide all required parameters (name, brand_id, category_id, model_year, list_price, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the product.
+        - name: brand_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the brand.
+        - name: category_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the category.
+        - name: model_year
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The model year of the product.
+        - name: list_price
+          in: query
+          required: true
+          schema:
+            type: number
+          description: The list price of the product.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Product added successfully
+        "400":
+          description: Invalid input or missing parameters
+  /updateProduct/{id}:
+    put:
+      summary: Update a product
+      description: |
+        Use this endpoint to update an existing product. You must provide the product ID and a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product to update.
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: brand_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: category_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: model_year
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: list_price
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product updated successfully
+        "400":
+          description: Invalid input or missing parameters
+  /deleteProduct/{id}:
+    delete:
+      summary: Delete a product
+      description: |
+        Use this endpoint to delete a product by its ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Product deleted successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /categories:
+    get:
+      summary: Get all categories
+      responses:
+        "200":
+          description: A list of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+  /categorie/{id}:
+    get:
+      summary: Get category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A category object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+
+  /insertCategory:
+    post:
+      summary: Add a new category
+      description: |
+        Use this endpoint to add a new category. You must provide all required parameters (name, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the category.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Category added successfully
+        "400":
+          description: Invalid input or missing parameters
+  /updateCategory/{id}:
+    put:
+      summary: Update a category
+      description: |
+        Use this endpoint to update an existing category. You must provide the category ID and a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the category to update.
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category updated successfully
+        "400":
+          description: Invalid input or missing parameters
+  /deleteCategory/{id}:
+    delete:
+      summary: Delete a category
+      description: |
+        Use this endpoint to delete a category by its ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the category to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Category deleted successfully
+        "400":
+          description: Invalid input or missing parameters
+
+  /brands:
+    get:
+      summary: Get all brands
+      responses:
+        "200":
+          description: A list of brands
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Brand"
+  /brand/{id}:
+    get:
+      summary: Get brand by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A brand object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Brand"
+  /insertBrand:
+    post:
+      summary: Add a new brand
+      description: |
+        Use this endpoint to add a new brand. You must provide all required parameters (name, KEY) and a valid API key (`KEY`).
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the brand.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Brand added successfully
+        "400":
+          description: Invalid input or missing parameters
+  /updateBrand/{id}:
+    put:
+      summary: Update a brand
+      description: |
+        Use this endpoint to update an existing brand. You must provide the brand ID and a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the brand to update.
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Brand updated successfully
+        "400":
+          description: Invalid input or missing parameters
+  /deleteBrand/{id}:
+    delete:
+      summary: Delete a brand
+      description: |
+        Use this endpoint to delete a brand by its ID. You must provide a valid API key (`KEY`).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the brand to delete.
+        - name: KEY
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The API key for authentication.
+      responses:
+        "200":
+          description: Brand deleted successfully
+        "400":
+          description: Invalid input or missing parameters 
+ 
+
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        employee_id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        store_id:
+          type: integer
+
+    Store:
+      type: object
+      properties:
+        store_id:
+          type: integer
+        store_name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+
+    Stock:
+      type: object
+      properties:
+        stock_id:
+          type: integer
+        product_id:
+          type: integer
+        store_id:
+          type: integer
+        quantity:
+          type: integer
+
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        product_name:
+          type: string
+        brand_id:
+          type: integer
+        category_id:
+          type: integer
+        model_year:
+          type: integer
+        list_price:
+          type: number
+
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: integer
+        category_name:
+          type: string
+
+    Brand:
+      type: object
+      properties:
+        brand_id:
+          type: integer
+        brand_name:
+          type: string

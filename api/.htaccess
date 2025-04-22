@@ -1,0 +1,51 @@
+Allow From All
+Satisfy Any
+RewriteEngine On
+RewriteBase /api/
+RewriteRule ^$ /api/manuel.php [L]
+#GEt
+RewriteRule ^employees$ /api/api.php?actionGet=employees [QSA,L]
+RewriteRule ^employee/([0-9]+)$ /api/api.php?actionGet=employee&id=$1 [QSA,L]
+RewriteRule ^employeeByStore/([0-9]+)$ /api/api.php?actionGet=employeeByStore&id=$1 [QSA,L]
+
+RewriteRule ^stores$ /api/api.php?actionGet=stores [QSA,L]
+RewriteRule ^store/([0-9]+)$ /api/api.php?actionGet=store&id=$1 [QSA,L]
+
+RewriteRule ^stocks$ /api/api.php?actionGet=stocks [QSA,L]
+RewriteRule ^stock/([0-9]+)$ /api/api.php?actionGet=stock&id=$1 [QSA,L]
+RewriteRule ^stockbystore/([0-9]+)$ /api/api.php?actionGet=stockbystore&id=$1 [QSA,L]
+
+RewriteRule ^products$ /api/api.php?actionGet=products [QSA,L]
+RewriteRule ^product/([0-9]+)$ /api/api.php?actionGet=product&id=$1 [QSA,L]
+RewriteRule ^productbycategory/([0-9]+)$ /api/api.php?actionGet=productbycategory&id=$1 [QSA,L]
+RewriteRule ^productbybrand/([0-9]+)$ /api/api.php?actionGet=productbybrand&id=$1 [QSA,L]
+
+RewriteRule ^categories$ /api/api.php?actionGet=categories [QSA,L]
+RewriteRule ^categorie/([0-9]+)$ /api/api.php?actionGet=categorie&id=$1 [QSA,L]
+
+RewriteRule ^brands$ /api/api.php?actionGet=brands [QSA,L]
+RewriteRule ^brand/([0-9]+)$ /api/api.php?actionGet=brand&id=$1 [QSA,L]
+
+# POST
+RewriteRule ^insertEmployee$ /api/api.php?actionPost=insertEmployee [QSA,L]
+RewriteRule ^insertStore$ /api/api.php?actionPost=insertStore [QSA,L]
+RewriteRule ^insertProduct$ /api/api.php?actionPost=insertProduct [QSA,L]
+RewriteRule ^insertBrand$ /api/api.php?actionPost=insertBrand [QSA,L]
+RewriteRule ^insertCategorie$ /api/api.php?actionPost=insertCategorie [QSA,L]
+RewriteRule ^insertStock$ /api/api.php?actionPost=insertStock [QSA,L]
+
+# PUT
+RewriteRule ^updateEmployee/([0-9]+)$ /api/api.php?actionPut=updateEmployee&id=$1 [QSA,L]
+RewriteRule ^updateStore/([0-9]+)$ /api/api.php?actionPut=updateStore&id=$1 [QSA,L]
+RewriteRule ^updateProduct/([0-9]+)$ /api/api.php?actionPut=updateProduct&id=$1 [QSA,L]
+RewriteRule ^updateBrand/([0-9]+)$ /api/api.php?actionPut=updateBrand&id=$1 [QSA,L]
+RewriteRule ^updateCategorie/([0-9]+)$ /api/api.php?actionPut=updateCategorie&id=$1 [QSA,L]
+RewriteRule ^updateStock/([0-9]+)$ /api/api.php?actionPut=updateStock&id=$1 [QSA,L]
+
+# DELETE
+RewriteRule ^deleteEmployee/([0-9]+)$ /api/api.php?actionDelete=deleteEmployee&id=$1 [QSA,L]
+RewriteRule ^deleteStore/([0-9]+)$ /api/api.php?actionDelete=deleteStore&id=$1 [QSA,L]
+RewriteRule ^deleteProduct/([0-9]+)$ /api/api.php?actionDelete=deleteProduct&id=$1 [QSA,L]
+RewriteRule ^deleteBrand/([0-9]+)$ /api/api.php?actionDelete=deleteBrand&id=$1 [QSA,L]
+RewriteRule ^deleteCategorie/([0-9]+)$ /api/api.php?actionDelete=deleteCategorie&id=$1 [QSA,L]
+RewriteRule ^deleteStock/([0-9]+)$ /api/api.php?actionDelete=deleteStock&id=$1 [QSA,L]

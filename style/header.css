@@ -1,0 +1,96 @@
+/* Modern gradient header with shadow and smooth nav links */
+
+header {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    background: transparent !important;
+    box-shadow: none;
+    padding: 0;
+}
+
+.container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: #f39c12 !important;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.12);
+    transition: color 0.2s;
+}
+
+.navbar-brand:hover {
+    color: #fff !important;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: 1.1em;
+    font-family: 'Roboto', Arial, sans-serif;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+}
+
+.nav-link:hover, .nav-link.active, .nav-link:focus {
+    background: #f39c12;
+    color: #232526 !important;
+    border-bottom: 2px solid #fff;
+    outline: none;
+}
+
+.navbar-toggler {
+    border: none;
+    background: #f39c12 !important;
+    border-radius: 6px;
+    padding: 6px 10px;
+    transition: background 0.2s;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f39c12;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28243,156,18, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 900px) {
+    .container-fluid {
+        padding: 0 10px;
+    }
+    .navbar-nav {
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .navbar-brand {
+        font-size: 1.5em;
+    }
+}
